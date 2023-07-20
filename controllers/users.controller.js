@@ -1,22 +1,43 @@
+const User = require("../models/user.model");
+
 module.exports.list = (req, res) => {
-  res.send("user list");
+  User.find()
+    .then((users) => {
+      res.render("users/list", { users });
+    })
+    .catch((err) => {
+      // TODO
+    });
 };
 
 module.exports.detail = (req, res) => {
-  console.log("query", req.query);
-  console.log("path", req.params);
-
-  res.send("user detail");
+  User.findById(req.params.id)
+    .then((user) => {
+      if (user) {
+        res.render("users/detail", { user });
+      } else {
+        req.redirect("/users");
+      }
+    })
+    .catch((err) => {});
 };
 
 module.exports.create = (req, res) => {
-  res.send("user create");
+  // TODO
 };
 
-module.exports.update = (req, res) => {
-  res.send("user update");
+module.exports.doCreate = (req, res) => {
+  // TODO
+};
+
+module.exports.edit = (req, res) => {
+  // TODO
+};
+
+module.exports.doEdit = (req, res) => {
+  // TODO
 };
 
 module.exports.delete = (req, res) => {
-  res.send("user delete");
+  // TODO
 };
