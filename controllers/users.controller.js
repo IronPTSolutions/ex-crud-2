@@ -23,21 +23,41 @@ module.exports.detail = (req, res) => {
 };
 
 module.exports.create = (req, res) => {
-  // TODO
+  res.render("users/new");
 };
 
 module.exports.doCreate = (req, res) => {
-  // TODO
+  User.create({
+    name: req.body.name,
+  })
+    .then((user) => {
+      res.redirect("/users");
+    })
+    .catch(() => {});
 };
 
 module.exports.edit = (req, res) => {
-  // TODO
+  User.findById(req.params.id)
+    .then((user) => {
+      res.render("users/edit", { user });
+    })
+    .catch(() => {});
 };
 
 module.exports.doEdit = (req, res) => {
-  // TODO
+  User.findByIdAndUpdate(req.params.id, {
+    name: req.body.name,
+  })
+    .then((user) => {
+      res.redirect("/users");
+    })
+    .catch(() => {});
 };
 
 module.exports.delete = (req, res) => {
-  // TODO
+  User.findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.redirect('/users')
+    })
+    .catch(() => {});
 };

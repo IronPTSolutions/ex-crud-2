@@ -6,6 +6,9 @@ const app = express();
 app.set("view engine", "hbs");
 app.set("views", `${__dirname}/views`);
 
+/** Support req.body **/
+app.use(express.urlencoded({ extended: true }));
+
 /** Congiure static files */
 app.use(express.static("public"));
 
